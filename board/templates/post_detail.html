@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="detail-wrapper">
+    <h2>Detail Post #{{post.pk}}</h2>
+    <div class="card-body">
+        <h5 class="card-title">{{ post.title }}</h5>
+        <p>Content : {{ post.content }}</p>
+        <p>Author : {{ post.author }}</p>
+        <p>Created At : {{ post.created_at }}</p>
+    </div>
+
+    <div class="d-flex justify-content-start" style="margin:10px auto 0;">
+        <a href="{% url 'board:post_update' post.pk %}" class="btn btn-outline-secondary">수정</a>
+        <form action="{% url 'board:post_delete' post.pk %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-secondary">삭제</button></form>
+        <a href="{% url 'board:post_list' %}" class="btn btn-outline-secondary">목록</a>
+    </div>
+</div>
+
+{% endblock content %}
+
